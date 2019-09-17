@@ -35,8 +35,12 @@ public class Cells {
         A9.SetNeighboursN(A6);
         A9.SetNeighboursW(A8);
 
-        System.out.println(A1.neighbourEast);
-        Object[] fieldArr = new Object[] {A1, A2, A3, A4, A5, A6, A7, A8, A9};
+        Object[] CellsArr = new Object[] {A1, A2, A3, A4, A5, A6, A7, A8, A9};
 
+    }
+    public static int ChoiceCrop(Object Arr[]){
+        for (int i = 0; i < Arr.length; i++) {
+
+        }
     }
 }
