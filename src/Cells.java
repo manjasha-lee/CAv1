@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Cells {
     public static void main(String[] args) {
 
@@ -36,6 +37,12 @@ public class Cells {
         A9.SetNeighboursW(A8);
 
         Object[] CellsArr = new Object[] {A1, A2, A3, A4, A5, A6, A7, A8, A9};
+
+        System.out.println("Введите количество желаемых объемов засева пшеницей в Га (не более 19,8):");
+        Scanner pshenitsa = new Scanner(System.in);
+        System.out.println("Введите количество желаемых объемов засева кукурузой в Га (не более" + 19,8 - pshenitsa +"):");// стринг преобразовать в double!
+        Scanner kukuruza = new Scanner(System.in);
+        Scanner oves = new Scanner(System.in);
 
     }
     public static int ChoiceCrop(Object Arr[]){
