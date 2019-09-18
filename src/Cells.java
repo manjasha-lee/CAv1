@@ -38,16 +38,20 @@ public class Cells {
 
         Object[] CellsArr = new Object[] {A1, A2, A3, A4, A5, A6, A7, A8, A9};
 
-        System.out.println("Введите количество желаемых объемов засева пшеницей в Га (не более 19,8):");
+        System.out.println("Введите количество желаемых объемов засева пшеницей в Га (не более 19.8):");
         Scanner pshenitsa = new Scanner(System.in);
-        System.out.println("Введите количество желаемых объемов засева кукурузой в Га (не более" + 19,8 - pshenitsa +"):");// стринг преобразовать в double!
+        double itogoPshenitsa = pshenitsa.nextFloat();
+        double balanceGa = 19.8 - itogoPshenitsa;
+
+        System.out.println("Введите количество желаемых объемов засева кукурузой в Га (не более " + balanceGa +"):");
         Scanner kukuruza = new Scanner(System.in);
-        Scanner oves = new Scanner(System.in);
+        double itogoKukuruza = kukuruza.nextFloat();
+        double itogoOves = balanceGa - itogoKukuruza;
+
+        System.out.print("Количество желаемых объемов засева овсом в Га равен: ");
+        System.out.printf("%.2f",itogoOves);
+
 
     }
-    public static int ChoiceCrop(Object Arr[]){
-        for (int i = 0; i < Arr.length; i++) {
 
-        }
-    }
 }
