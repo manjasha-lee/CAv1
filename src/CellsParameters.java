@@ -1,10 +1,11 @@
 public class CellsParameters {
     public double fieldCell;
     public String predecessor;
-    public Object neighbourNorth;
-    public Object neighbourEast;
-    public Object neighbourSouth;
-    public Object neighbourWest;
+    public CellsParameters neighbourNorth;
+    public CellsParameters neighbourEast;
+    public CellsParameters neighbourSouth;
+    public CellsParameters neighbourWest;
+    public String bestVariantCrop;
 
 
 
@@ -12,17 +13,25 @@ public class CellsParameters {
         this.fieldCell = fieldCell;
         this.predecessor = predecessor;
     }
-    public void SetNeighboursN(Object neighbourNorth){
+    public void SetNeighboursN(CellsParameters neighbourNorth){
          this.neighbourNorth = neighbourNorth;
     }
-    public void SetNeighboursE(Object neighbourEast){
+    public void SetNeighboursE(CellsParameters neighbourEast){
+
         this.neighbourEast = neighbourEast;
     }
-    public void SetNeighboursS(Object neighbourSouth){
+    public void SetNeighboursS(CellsParameters neighbourSouth){
+
         this.neighbourSouth = neighbourSouth;
     }
-    public void SetNeighboursW(Object neighbourWest){
+    public void SetNeighboursW(CellsParameters neighbourWest){
+
         this.neighbourWest = neighbourWest;
+    }
+
+    public void SetBestVariantCrop (String bestVariantCrop){
+
+        this.bestVariantCrop = bestVariantCrop;
     }
 }
 
