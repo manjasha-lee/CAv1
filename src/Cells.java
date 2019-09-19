@@ -38,9 +38,6 @@ public class Cells {
         a9.SetNeighboursN(a6);
         a9.SetNeighboursW(a8);
 
-        ArrayList <String> variantCrop = new ArrayList();
-        ArrayList <Double> ballCrop = new ArrayList();
-
         CellsParameters[] cellsArr = new CellsParameters[]{a1, a2, a3, a4, a5, a6, a7, a8, a9};
 
         System.out.println("Введите необходимую площадь земли для засева пшеницей в Га (не более 19.8):");
@@ -58,6 +55,9 @@ public class Cells {
         System.out.println(" ");
 
         for (int i = 0; i < cellsArr.length; i++) {
+            ArrayList <String> variantCrop = new ArrayList();
+            ArrayList <Double> ballCrop = new ArrayList();
+
             String cellPredecessorCrop = cellsArr[i].predecessor;
             double areaFieldCell = cellsArr[i].fieldCell;
             String currentNeighbourN = " ";
@@ -119,10 +119,15 @@ public class Cells {
         }else if (cellPredecessor.equals("овес")) {
             arrVariantCrop.add("кукуруза");
             arrBallCrop.add(10.0);
+            arrVariantCrop.add("овес");
+            arrBallCrop.add(0.0);
         }
     }
     public static void countByNecessaryCrop(double xItogoPshenitsa, double xItogoKukuruza, double xItogoOves, double xFieldCell, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
         for (int j = 0; j < arrVariantCrop.size() ; j++) {
+
+            System.out.println(arrVariantCrop.get(j)+ " " + arrBallCrop.get(j));
+
             if (arrVariantCrop.get(j).equals("кукуруза")){
                 double currentScore = arrBallCrop.get(j);
                 currentScore += xItogoKukuruza;
