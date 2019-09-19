@@ -42,12 +42,12 @@ public class Cells {
 
         System.out.println("Введите необходимую площадь земли для засева пшеницей в Га (не более 19.8):");
         Scanner pshenitsa = new Scanner(System.in);
-        double itogoPshenitsa = pshenitsa.nextFloat();
+        double itogoPshenitsa = pshenitsa.nextDouble();
         double balanceGa = 19.8 - itogoPshenitsa;
 
         System.out.println("Введите необходимую площадь земли для засева кукурузой в Га (не более " + balanceGa + "):");
         Scanner kukuruza = new Scanner(System.in);
-        double itogoKukuruza = kukuruza.nextFloat();
+        double itogoKukuruza = kukuruza.nextDouble();
         double itogoOves = balanceGa - itogoKukuruza;
 
         System.out.print("Площадь земли для засева овсом в Га равен: ");
@@ -119,14 +119,10 @@ public class Cells {
         }else if (cellPredecessor.equals("овес")) {
             arrVariantCrop.add("кукуруза");
             arrBallCrop.add(10.0);
-            arrVariantCrop.add("овес");
-            arrBallCrop.add(0.0);
         }
     }
-    public static void countByNecessaryCrop(double xItogoPshenitsa, double xItogoKukuruza, double xItogoOves, double xFieldCell, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
+    public static double countByNecessaryCrop(double xItogoPshenitsa, double xItogoKukuruza, double xItogoOves, double xFieldCell, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
         for (int j = 0; j < arrVariantCrop.size() ; j++) {
-
-            System.out.println(arrVariantCrop.get(j)+ " " + arrBallCrop.get(j));
 
             if (arrVariantCrop.get(j).equals("кукуруза")){
                 double currentScore = arrBallCrop.get(j);
@@ -134,19 +130,25 @@ public class Cells {
                 arrBallCrop.set(j,currentScore);
 
                 xItogoKukuruza -= xFieldCell;
+                return xItogoKukuruza;
             }else if(arrVariantCrop.get(j).equals("пшеница")){
                 double currentScore = arrBallCrop.get(j);
                 currentScore += xItogoPshenitsa;
                 arrBallCrop.set(j,currentScore);
 
                 xItogoPshenitsa -= xFieldCell;
+                return xItogoPshenitsa;
             }else if(arrVariantCrop.get(j).equals("овес")) {
                 double currentScore = arrBallCrop.get(j);
                 currentScore += xItogoOves;
                 arrBallCrop.set(j, currentScore);
 
                 xItogoOves -= xFieldCell;
+                return xItogoOves;
+            }else {
+                return xItogoOves;
             }
+            System.out.println(arrVariantCrop.get(j)+ " " + arrBallCrop.get(j));
         }
     }
     public static void countByNeighdors(String neighborN, String neighborE, String neighborS, String neighborW, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
