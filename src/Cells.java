@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 public class Cells {
+  public static double itogoPshenitsa;
+  public static double itogoKukuruza;
+  public static double itogoOves;
+
     public static void main(String[] args) {
 
         CellsParameters a1 = new CellsParameters(1.1, "пшеница");
@@ -42,13 +46,13 @@ public class Cells {
 
         System.out.println("Введите необходимую площадь земли для засева пшеницей в Га (не более 19.8):");
         Scanner pshenitsa = new Scanner(System.in);
-        double itogoPshenitsa = pshenitsa.nextDouble();
+        itogoPshenitsa = pshenitsa.nextDouble();
         double balanceGa = 19.8 - itogoPshenitsa;
 
         System.out.println("Введите необходимую площадь земли для засева кукурузой в Га (не более " + balanceGa + "):");
         Scanner kukuruza = new Scanner(System.in);
-        double itogoKukuruza = kukuruza.nextDouble();
-        double itogoOves = balanceGa - itogoKukuruza;
+        itogoKukuruza = kukuruza.nextDouble();
+        itogoOves = balanceGa - itogoKukuruza;
 
         System.out.print("Площадь земли для засева овсом в Га равен: ");
         System.out.printf("%.2f", itogoOves);
@@ -80,7 +84,7 @@ public class Cells {
 
             if (i == 0) {
                 countByPredecessor(cellPredecessorCrop, variantCrop, ballCrop);
-                countByNecessaryCrop(itogoPshenitsa, itogoKukuruza, itogoOves, areaFieldCell, variantCrop, ballCrop);
+                countByNecessaryCrop(areaFieldCell, variantCrop, ballCrop);
 
                 double maxBall = Collections.max(ballCrop, Double::compare);//получаем максимальный балл
                 int indexMaxBall = ballCrop.indexOf(maxBall);//получаем индекс максимального балла в коллекции
@@ -89,7 +93,7 @@ public class Cells {
                 System.out.println("Клетка а"+(i+1)+" - культура: "+cellsArr[i].bestVariantCrop);
             }else {
                 countByPredecessor(cellPredecessorCrop, variantCrop, ballCrop);
-                countByNecessaryCrop(itogoPshenitsa, itogoKukuruza, itogoOves, areaFieldCell, variantCrop, ballCrop);
+                countByNecessaryCrop(areaFieldCell, variantCrop, ballCrop);
                 countByNeighdors(currentNeighbourN, currentNeighbourE, currentNeighbourS, currentNeighbourW, variantCrop, ballCrop);
 
                 double maxBall = Collections.max(ballCrop, Double::compare);//получаем максимальный балл
@@ -121,32 +125,27 @@ public class Cells {
             arrBallCrop.add(10.0);
         }
     }
-    public static double countByNecessaryCrop(double xItogoPshenitsa, double xItogoKukuruza, double xItogoOves, double xFieldCell, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
+    public static void countByNecessaryCrop(double xFieldCell, ArrayList <String> arrVariantCrop, ArrayList <Double> arrBallCrop){
         for (int j = 0; j < arrVariantCrop.size() ; j++) {
 
             if (arrVariantCrop.get(j).equals("кукуруза")){
                 double currentScore = arrBallCrop.get(j);
-                currentScore += xItogoKukuruza;
+                currentScore += itogoKukuruza;
                 arrBallCrop.set(j,currentScore);
 
-                xItogoKukuruza -= xFieldCell;
-                return xItogoKukuruza;
+                itogoKukuruza -= xFieldCell;
             }else if(arrVariantCrop.get(j).equals("пшеница")){
                 double currentScore = arrBallCrop.get(j);
-                currentScore += xItogoPshenitsa;
+                currentScore += itogoPshenitsa;
                 arrBallCrop.set(j,currentScore);
 
-                xItogoPshenitsa -= xFieldCell;
-                return xItogoPshenitsa;
+                itogoPshenitsa -= xFieldCell;
             }else if(arrVariantCrop.get(j).equals("овес")) {
                 double currentScore = arrBallCrop.get(j);
-                currentScore += xItogoOves;
+                currentScore += itogoOves;
                 arrBallCrop.set(j, currentScore);
 
-                xItogoOves -= xFieldCell;
-                return xItogoOves;
-            }else {
-                return xItogoOves;
+                itogoOves -= xFieldCell;
             }
             System.out.println(arrVariantCrop.get(j)+ " " + arrBallCrop.get(j));
         }
